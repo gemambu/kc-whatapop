@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Http, Response, RequestOptions } from '@angular/http';
+import { Http, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -61,7 +61,19 @@ export class ProductService {
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
     let params: any = new URLSearchParams();
-    params = {'_sort': 'publishedDate', '_order':'DESC'};
+    params.append('_sort', 'publishedDate');
+    params.append('_order', 'DESC');
+
+    if(filter !== null){
+      if(filter.text !== null && filter.text !== ''){
+        params.append('q', filter.text);
+      }
+      if(filter.category !== null  && filter.category !== ''  && filter.category !== '0'){
+        params.append('category.id', filter.category);
+      }
+    }
+
+console.log('Params final: ', params);
 
     return this._http
       .get(`${this._backendUri}/products`, {'search' : params})
