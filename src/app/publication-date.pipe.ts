@@ -1,8 +1,10 @@
+import { Pipe, PipeTransform} from '@angular/core';
+
 import * as moment from 'moment';
 import 'moment/locale/es';
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-| Blue Path                                                        |
+| Blue Path - DONE                                                 |
 |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
 | Crea el pipe PublicationDatePipe. Su cometido es, partiendo de   |
 | una fecha dada, retornar una cadena de texto que exprese el      |
@@ -12,3 +14,12 @@ import 'moment/locale/es';
 | tienes que usarla donde proceda. Haciendo                        |
 | 'moment(fecha).fromNow()' obtenemos justo lo que necesitamos.    |
 |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+@Pipe({name: 'PublicationDatePipe'})
+export class PublicationDatePipe implements PipeTransform{
+    transform(value: number): string {
+        let date = new Date(value);
+        return moment(date).fromNow();
+    }
+
+}

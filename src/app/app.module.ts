@@ -27,6 +27,8 @@ import { UserService } from './user.service';
 | No olvides declarar PublicationDatePipe en el módulo.            |
 |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+import { PublicationDatePipe } from './publication-date.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,8 @@ import { UserService } from './user.service';
     ProductResetComponent,
     ProductComponent,
     ProductsCollectionComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    PublicationDatePipe
   ],
   imports: [
     BrowserModule,
