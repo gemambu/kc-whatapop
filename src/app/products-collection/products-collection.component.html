@@ -5,7 +5,7 @@
   <div *ngIf="products?.length > 0" class="small-up-2 medium-up-4 large-up-6">
 
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Green Path                                                       |
+    | Green Path  DONE                                                 |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Suscribe el componente ProductComponent al evento que hayas      |
     | definido en él para notificar los clics sobre los productos.     |
@@ -14,7 +14,9 @@
     <app-product
       *ngFor="let product of products"
       [data]="product"
+      (clickOnDetail)="showDetails($event)"
       class="column">
+      <a [routerLink]="['products', product.id]">{{ product.id }}</a>
     </app-product>
   </div>
   <div *ngIf="products?.length === 0" class="text-center">

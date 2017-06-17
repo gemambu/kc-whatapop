@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Product } from '../product';
 
@@ -11,8 +11,9 @@ export class ProductComponent {
 
   @Input() data: Product;
 
+  
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-  | Green Path                                                       |
+  | Green Path - DONE                                                |
   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
   | Expón un atributo de salida con el decorador correspondiente. El |
   | tipo de dicho atributo debe permitir la emisión de eventos; la   |
@@ -21,5 +22,12 @@ export class ProductComponent {
   | de este componente, necesitas, además, un manejador para el      |
   | mismo.                                                           |
   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+  @Output() clickOnDetail = new EventEmitter<Product>();
+
+  notifyDetail(product: Product): void {
+    console.info("Clicked detail for product: " + product.name);
+    this.clickOnDetail.emit(product);
+  }
 
 }
