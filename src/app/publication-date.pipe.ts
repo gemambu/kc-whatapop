@@ -21,5 +21,4 @@ export class PublicationDatePipe implements PipeTransform{
         let date = new Date(value);
         return moment(date).fromNow();
     }
-
 }

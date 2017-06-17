@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -14,10 +14,11 @@ export class ProductService {
     private _http: Http,
     @Inject(BackendUri) private _backendUri) { }
 
-  getProducts(filter: ProductFilter = undefined): Observable<Product[]> {
+  getProducts(filter: ProductFilter = undefined): Observable<Product[]> {    
+
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Pink Path                                                        |
+    | Pink Path - DONE                                                 |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Pide al servidor que te retorne los productos ordenados de más   |
     | reciente a menos, teniendo en cuenta su fecha de publicación.    |
@@ -59,8 +60,11 @@ export class ProductService {
     |       state=x (siendo x el estado)                               |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+    let params: any = new URLSearchParams();
+    params = {'_sort': 'publishedDate', '_order':'DESC'};
+
     return this._http
-      .get(`${this._backendUri}/products`)
+      .get(`${this._backendUri}/products`, {'search' : params})
       .map((data: Response): Product[] => Product.fromJsonToList(data.json()));
   }
 
