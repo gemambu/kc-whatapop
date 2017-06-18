@@ -43,4 +43,8 @@ export class ProductResetComponent implements OnDestroy, OnInit {
     this._productStream$.next(productId);
   }
 
+  goBack(): void {
+    window.history.back();
+  }
+
 }
