@@ -31,7 +31,7 @@ export class ProductService {
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Red Path                                                         |
+    | Red Path  - DONE                                                 |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Pide al servidor que te retorne los productos filtrados por      |
     | texto y/ por categoría.                                          |
@@ -47,7 +47,7 @@ export class ProductService {
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Yellow Path                                                      |
+    | Yellow Path  - DONE                                              |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Pide al servidor que te retorne los productos filtrados por      |
     | estado.                                                          |
@@ -71,9 +71,13 @@ export class ProductService {
       if(filter.category !== null  && filter.category !== ''  && filter.category !== '0'){
         params.append('category.id', filter.category);
       }
+      if(filter.state !== null && filter.state !== ''){
+        console.info('Filtro estado: ', filter.state);
+        params.append('state', filter.state);
+      }
     }
 
-console.log('Params final: ', params);
+    console.info('Filtro: ', params);
 
     return this._http
       .get(`${this._backendUri}/products`, {'search' : params})
