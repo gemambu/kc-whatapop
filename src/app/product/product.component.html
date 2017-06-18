@@ -11,7 +11,7 @@
   
 
   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-  | Purple Path                                                      |
+  | Purple Path - DONE                                               |
   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
   | Aplica el siguiente formato al precio del producto:              |
   |   - 1 dígito mínimo (parte entera)                               |
@@ -24,7 +24,7 @@
     [class.secondary]="data.state === 'sold'"
     (click)="notifyDetail(data)">
       <span *ngIf="data.state === 'selling'">
-        Comprar por {{ data.price }} €
+        Comprar por {{ data.price | number: '1.2-2' }} €
       </span>
       <span *ngIf="data.state === 'sold'">
         Ver detalles
