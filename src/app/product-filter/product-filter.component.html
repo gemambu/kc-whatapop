@@ -8,6 +8,12 @@
         <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
       </select>
     </div>
+     <div class="small-6 medium-2 large-3 columns">
+      <select [(ngModel)]="productFilter.state">
+        <option value="" ng-if="false"></option>
+        <option *ngFor="let state of _productsState" [value]="state.id">{{ state.value }}</option>
+      </select>
+    </div>
     <div class="small-12 medium-3 large-2 columns">
       <button (click)="notifyHost()" class="button expanded">Buscar</button>
     </div>
