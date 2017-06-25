@@ -46,24 +46,38 @@
 </div>
 <div class="order">
    <div class="row">
-    <div class="small-6 medium-6 large-6 columns">
+    <div class="small-5 medium-5 large-5 columns">
       <label for="idOrderField">Ordernar por campo</label>
         <input type="radio" 
-                name="editListField" 
-                value="publishedDate" 
-                [(ngModel)]="productFilter.orderField"
-                 checked> Fecha
+                name="editListFieldDate" 
+                value="publishedDate"
+                [(ngModel)]="productFilter.orderField"> Fecha
         <input type="radio" 
-                name="editListField" 
+                name="editListFieldTitle" 
                 value="name"
-                [(ngModel)]="productFilter.orderField"
-                > Título
+                [(ngModel)]="productFilter.orderField"> Título
     </div>
-    <div class="small-6 medium-6 large-6 columns">
+
+    <div class="small-5 medium-5 large-5 columns">
       <label for="idOrderType">Tipo de ordenación</label>
-        <input type="radio" name="editListType" value="ASC"
-        [(ngModel)]="productFilter.orderType" checked> Ascendente
-        <input type="radio" name="editListType" value="DESC"
-        [(ngModel)]="productFilter.orderType"> Descendente
-   </div>
+        <input type="radio" 
+              name="editListTypeASC" 
+              value="ASC"
+              ngValue="ASC"
+              [(ngModel)]="productFilter.orderType"> Ascendente
+              
+        <input type="radio" 
+              name="editListTypeDESC" 
+              value="DESC" 
+              ngValue="DESC"
+              [(ngModel)]="productFilter.orderType"> Descendente
+    </div>
+    <div class="small-2 medium-2 large-2 columns">
+      <button (click)="notifyHost()" class="button expanded">Ordenar</button>
+    </div>
+
+
+    </div>
 </div>
+
+

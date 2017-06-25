@@ -63,19 +63,26 @@ export class ProductService {
     let params: any = new URLSearchParams();
 
     // Ordenación por defecto: fecha de publicación, descendente
-    params.append('_sort', 'publishedDate');
-    params.append('_order', 'DESC');
+    params.append('_sort', 'title');
+    params.append('_order', 'ASC');
 
     if(filter !== null){
-
       // Seleccionamos el tipo de ordenacion
       if (filter.orderField !== null && filter.orderField !== ''){
+        console.log('CAMPO de FILTRO: ', filter.orderField);
         params.set('_sort', filter.orderField);
       } 
+      // else {
+      //   params.append('_sort', 'publishedDate');
+      // }
 
       if (filter.orderType !== null && filter.orderType !== ''){
+        console.log('TIPO de FILTRO: ', filter.orderType);
         params.set('_order', filter.orderType);
       } 
+      // else {
+      //   params.append('_order', 'DESC');
+      // }
 
       // Seleccionamos filtros
       if(filter.title !== null && filter.title !== ''){
@@ -101,6 +108,9 @@ export class ProductService {
         let date = new Date(filter.publishedDate);
         params.append('publishedDate_lte', date.getTime());
       }
+
+
+      console.log('Filtro y orden: ', params);
     }
 
     return this._http

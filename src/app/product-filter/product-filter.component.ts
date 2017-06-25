@@ -15,11 +15,11 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
 
   @Output() onSearch: EventEmitter<ProductFilter> = new EventEmitter();
 
-  //productFilter: ProductFilter = {};
-  productFilter: ProductFilter = { orderField: "publishedDate", orderType: "ASC" };
+  productFilter: ProductFilter = {};
   categories: Category[];
   private _categoriesSubscription: Subscription;
   private _productsState: any;
+
 
   constructor(private _categoryService: CategoryService) { }
 
@@ -33,6 +33,7 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
         {'id':'sold',
         'value':'Vendido'}
       ];
+      this.productFilter = { orderField: "name", orderType: "ASC" }
   }
 
   ngOnDestroy(): void {
@@ -42,5 +43,6 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
   notifyHost(): void {
     this.onSearch.emit(this.productFilter);
   }
+
 
 }
