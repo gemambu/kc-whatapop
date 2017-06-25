@@ -61,23 +61,47 @@ export class ProductService {
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
     let params: any = new URLSearchParams();
+
+    // Ordenación por defecto: fecha de publicación, descendente
     params.append('_sort', 'publishedDate');
     params.append('_order', 'DESC');
 
     if(filter !== null){
-      if(filter.text !== null && filter.text !== ''){
-        params.append('q', filter.text);
+
+      // Seleccionamos el tipo de ordenacion
+      if (filter.orderField !== null && filter.orderField !== ''){
+        params.set('_sort', filter.orderField);
+      } 
+
+      if (filter.orderType !== null && filter.orderType !== ''){
+        params.set('_order', filter.orderType);
+      } 
+
+      // Seleccionamos filtros
+      if(filter.title !== null && filter.title !== ''){
+        params.append('name_like', filter.title);
       }
       if(filter.category !== null  && filter.category !== ''  && filter.category !== '0'){
         params.append('category.id', filter.category);
       }
       if(filter.state !== null && filter.state !== ''){
-        console.info('Filtro estado: ', filter.state);
         params.append('state', filter.state);
       }
-    }
+      if(filter.description != null && filter.description !== ''){
+        params.append('description_like', filter.description);
+      }
+      if(filter.priceMin != null && filter.priceMin !== 0){
+        params.append('price_gte', filter.priceMin);
+      }
+      if(filter.priceMax != null && filter.priceMax !== 0){
+        params.append('price_lte', filter.priceMax);
+      }
 
-    console.info('Filtro: ', params);
+      if(filter.publishedDate != null && filter.publishedDate !== 'dd/mm/aaaa'){
+        let date = new Date(filter.publishedDate);
+        params.append('publishedDate_lte', date.getTime());
+      }
+    }
 
     return this._http
       .get(`${this._backendUri}/products`, {'search' : params})

@@ -5,6 +5,7 @@ import { Category } from '../category';
 import { CategoryService } from '../category.service';
 import { ProductFilter } from '../product-filter';
 
+
 @Component({
   selector: 'app-product-filter',
   templateUrl: './product-filter.component.html',
@@ -14,7 +15,8 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
 
   @Output() onSearch: EventEmitter<ProductFilter> = new EventEmitter();
 
-  productFilter: ProductFilter = {};
+  //productFilter: ProductFilter = {};
+  productFilter: ProductFilter = { orderField: "publishedDate", orderType: "ASC" };
   categories: Category[];
   private _categoriesSubscription: Subscription;
   private _productsState: any;
