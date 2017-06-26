@@ -16,6 +16,9 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
 
   product: Product;
   private _productSubscription: Subscription;
+  private _addFav: string = 'Añadir a favoritos';
+  private _removeFav: string = 'Eliminar de favoritos';
+  private _isFav: boolean;
 
   constructor(
     private _productService: ProductService,
@@ -53,6 +56,51 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
       message: `Vas a comprar ${this.product.name}. ¿Estás seguro?`,
       accept: () => this._buyProduct()
     });
+  }
+
+  isFav(productId: number): boolean {
+    var result: boolean = false;
+    if (typeof(Storage) !== "undefined") {
+      var starProduct: string[] = JSON.parse(localStorage.getItem("starProducts"));
+      if(starProduct !== null && starProduct.length !== 0){
+        if(starProduct.indexOf(productId.toString()) !== -1){
+          result = true;
+        }
+      }
+    } 
+
+    return result;
+    
+  }
+
+  manageLike(productId: number): void {
+    if (typeof(Storage) !== "undefined") {
+      // Setter
+      //localStorage.setItem("pageSize", 10);
+      // Getter
+      //const starProduct = JSON.parse(localStorage.getItem("starProducts"))[productId];
+
+      // Obtenemos el array almacenado
+      var starProduct: string[] = JSON.parse(localStorage.getItem("starProducts"));
+
+      console.log('storage: ', starProduct);
+
+      if(starProduct !== null && starProduct.length !== 0){
+        if(starProduct.indexOf(productId.toString()) === -1) {
+          starProduct.push(productId.toString());
+        } else {
+          let position = starProduct.indexOf(productId.toString());
+          starProduct.splice(position, 1);
+        }
+      } else {
+        console.log('inicializo starProduct');
+        starProduct = [];
+        starProduct.push(productId.toString());
+      }
+
+      localStorage.setItem("starProducts", JSON.stringify(starProduct));
+      console.log('favoritos: ', starProduct);
+    }
   }
 
   goBack(): void {

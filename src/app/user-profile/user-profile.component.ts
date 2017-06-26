@@ -36,4 +36,8 @@ export class UserProfileComponent implements OnChanges, OnDestroy {
     return this.user ? this.user.avatar : '';
   }
 
+  showProducts(): void {
+    console.log("aquí veria el listado de productos");
+  }
+
 }

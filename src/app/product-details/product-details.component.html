@@ -1,7 +1,14 @@
 <div class="row" *ngIf="product">
+  
   <div class="medium-4 columns">
     <img [src]="product.photo" class="thumbnail" />
+    <p>    
+     <span *ngIf="isFav(product.id) === true">
+      <i class="fa fa-heart fa-3x" aria-hidden="true"></i>
+    </span>
+    </p>
   </div>
+    
   <div class="medium-8 columns">
     <h3>{{ product.name }}</h3>
     <p>
@@ -12,13 +19,6 @@
         {{ product.category.name }}
       </span>
 
-      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-      | Blue Path  - DONE                                                |
-      |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-      | Una vez tengas creado el Pipe PublicationDatePipe, úsalo con la  |
-      | fecha de publicación.                                            |
-      |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
       <span>
         Publicado: {{ product.publishedDate | PublicationDatePipe }}
       </span>
@@ -26,19 +26,22 @@
     <p [innerHtml]="product.description"></p>
     <app-user-profile [userId]="product.seller.id"></app-user-profile>
 
-    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Purple Path - DONE                                               |
-    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Aplica el siguiente formato al precio del producto:              |
-    |   - 1 dígito mínimo (parte entera)                               |
-    |   - 2 dígitos mínimo y máximo (parte decimal)                    |
-    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
     <button *ngIf="product.state === 'selling'"
             (click)="showPurchaseWarning()"
             class="button large expanded">
       Comprar por {{ product.price | number: '1.2-2'}} €
     </button>
+
+    <button class="button large expanded"
+    (click)="manageLike(product.id)">
+      <span *ngIf="isFav(product.id) === false">
+      Añadir a favoritos
+      </span>
+      <span *ngIf="isFav(product.id) === true">
+      Eliminar de favoritos
+      </span>
+    </button>
+    
     <button (click)="goBack()" class="warning button expanded">Volver</button>
   </div>
   <!-- Confirmation alert -->
