@@ -44,5 +44,10 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
     this.onSearch.emit(this.productFilter);
   }
 
+  resetFilter(): void {
+    this.productFilter = { orderField: "name", orderType: "ASC" };
+    this.notifyHost();
+  }
+
 
 }

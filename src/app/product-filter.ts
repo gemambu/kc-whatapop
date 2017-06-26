@@ -8,4 +8,5 @@ export interface ProductFilter {
     publishedDate?: string;
     orderField?: string;
     orderType?: string;
+    userName?: string;
 }

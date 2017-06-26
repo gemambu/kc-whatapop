@@ -15,51 +15,6 @@ export class ProductService {
     @Inject(BackendUri) private _backendUri) { }
 
   getProducts(filter: ProductFilter = undefined): Observable<Product[]> {    
-
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Pink Path - DONE                                                 |
-    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Pide al servidor que te retorne los productos ordenados de más   |
-    | reciente a menos, teniendo en cuenta su fecha de publicación.    |
-    |                                                                  |
-    | En la documentación de 'JSON Server' tienes detallado cómo hacer |
-    | la ordenación de los datos en tus peticiones, pero te ayudo      |
-    | igualmente. La querystring debe tener estos parámetros:          |
-    |                                                                  |
-    |   _sort=publishedDate&_order=DESC                                |
-    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Red Path  - DONE                                                 |
-    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Pide al servidor que te retorne los productos filtrados por      |
-    | texto y/ por categoría.                                          |
-    |                                                                  |
-    | En la documentación de 'JSON Server' tienes detallado cómo       |
-    | filtrar datos en tus peticiones, pero te ayudo igualmente. La    |
-    | querystring debe tener estos parámetros:                         |
-    |                                                                  |
-    |   - Búsqueda por texto:                                          |
-    |       q=x (siendo x el texto)                                    |
-    |   - Búsqueda por categoría:                                      |
-    |       category.id=x (siendo x el identificador de la categoría)  |
-    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Yellow Path  - DONE                                              |
-    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-    | Pide al servidor que te retorne los productos filtrados por      |
-    | estado.                                                          |
-    |                                                                  |
-    | En la documentación de 'JSON Server' tienes detallado cómo       |
-    | filtrar datos en tus peticiones, pero te ayudo igualmente. La    |
-    | querystring debe tener estos parámetros:                         |
-    |                                                                  |
-    |   - Búsqueda por estado:                                         |
-    |       state=x (siendo x el estado)                               |
-    |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
     let params: any = new URLSearchParams();
 
     // Ordenación por defecto: fecha de publicación, descendente
@@ -109,6 +64,9 @@ export class ProductService {
         params.append('publishedDate_lte', date.getTime());
       }
 
+      if(filter.userName != null && filter.userName !== ''){
+        params.append('seller.nick_like', filter.userName);
+      }
 
       console.log('Filtro y orden: ', params);
     }

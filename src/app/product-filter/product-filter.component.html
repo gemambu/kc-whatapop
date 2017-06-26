@@ -2,7 +2,7 @@
   <div class="row">
     <div class="small-6 medium-3 large-3 columns">
       <label for="idName">Nombre de producto</label>
-      <input [(ngModel)]="productFilter.text" type="text" placeholder="Pe. Uncharted" id="idName">
+      <input [(ngModel)]="productFilter.title" type="text" placeholder="Pe. Uncharted" id="idName">
     </div>
      <div class="small-6 medium-3 large-3 columns">
       <label for="idDescripcion">Descripción</label>
@@ -39,14 +39,13 @@
       [(ngModel)]="productFilter.publishedDate"
        min="2000-01-01" max="3017-01-01"/>
     </div>
-     <div class="small-6 medium-3 large-3 columns">
-      <button (click)="notifyHost()" class="button expanded">Buscar</button>
+    <div class="small-6 medium-3 large-3 columns">
+      <label for="nameUser">Nombre de usuario</label>
+        <input [(ngModel)]="productFilter.userName" type="text" placeholder="Pe. ivolunteer" id="nameUser">
     </div>
   </div>
-</div>
-<div class="order">
-   <div class="row">
-    <div class="small-5 medium-5 large-5 columns">
+  <div class="row"> 
+    <div class="small-3 medium-3 large-3 columns">
       <label for="idOrderField">Ordernar por campo</label>
         <input type="radio" 
                 name="editListFieldDate" 
@@ -58,7 +57,7 @@
                 [(ngModel)]="productFilter.orderField"> Título
     </div>
 
-    <div class="small-5 medium-5 large-5 columns">
+    <div class="small-3 medium-3 large-3 columns">
       <label for="idOrderType">Tipo de ordenación</label>
         <input type="radio" 
               name="editListTypeASC" 
@@ -73,11 +72,11 @@
               [(ngModel)]="productFilter.orderType"> Descendente
     </div>
     <div class="small-2 medium-2 large-2 columns">
-      <button (click)="notifyHost()" class="button expanded">Ordenar</button>
+      <button (click)="notifyHost()" class="button expanded">Buscar</button>
     </div>
-
-
+    <div class="small-2 medium-2 large-2 columns">
+      <button (click)="resetFilter()" class="button expanded">Limpiar filtro</button>
     </div>
+  </div>
 </div>
-
 
