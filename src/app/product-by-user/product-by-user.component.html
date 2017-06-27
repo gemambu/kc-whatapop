@@ -1,8 +1,8 @@
 <div class="row">
   <div class="small-12 large-12 columns">
-    <app-product-filter (onSearch)="filterCollection($event)" ></app-product-filter>
+    <!--app-user-profile [userId]="product.seller.id"></app-user-profile-->
   </div>
-  <div *ngIf="products?.length > 0" class="small-up-2 medium-up-4 large-up-6">
+   <div *ngIf="products?.length > 0" class="small-up-2 medium-up-4 large-up-6">
     <app-product
       *ngFor="let product of products"
       [data]="product"
@@ -14,7 +14,5 @@
   <div *ngIf="products?.length === 0" class="text-center">
     <span>No se han encontrado productos.</span>
   </div>
-</div>
-<div class="text-center">
-  <a routerLink="/reset">Reset de productos</a>
+  <button (click)="goBack()" class="warning button expanded">Volver</button>
 </div>

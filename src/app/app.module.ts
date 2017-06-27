@@ -13,6 +13,8 @@ import { CategoryService } from './category.service';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductDetailsResolveService } from './product-details-resolve.service';
+import { ProductByUserComponent } from './product-by-user/product-by-user.component';
+import { ProductByUserResolveService } from './product-by-user-resolve.service'
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductResetComponent } from './product-reset/product-reset.component';
 import { ProductService } from './product.service';
@@ -21,24 +23,20 @@ import { SoldProductsResolveService } from './sold-products-resolve.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserService } from './user.service';
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-| Blue Path                                                        |
-|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-| No olvides declarar PublicationDatePipe en el módulo.            |
-|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
 import { PublicationDatePipe } from './publication-date.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductDetailsComponent,
+    ProductByUserComponent,
     ProductFilterComponent,
     ProductResetComponent,
     ProductComponent,
     ProductsCollectionComponent,
     UserProfileComponent,
-    PublicationDatePipe
+    PublicationDatePipe,
+    ProductByUserComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +51,7 @@ import { PublicationDatePipe } from './publication-date.pipe';
     CategoryService,
     ConfirmationService,
     ProductDetailsResolveService,
+    ProductByUserResolveService,
     ProductService,
     SoldProductsResolveService,
     UserService

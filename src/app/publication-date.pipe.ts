@@ -5,9 +5,9 @@ import 'moment/locale/es';
 
 @Pipe({name: 'PublicationDatePipe'})
 export class PublicationDatePipe implements PipeTransform{
+    
     transform(value: number): string {
         let date = new Date(value);
-        //return moment([date.getFullYear(), date.getMonth(), date.getDay()]).fromNow();
         return moment(date).fromNow();
     }
 }

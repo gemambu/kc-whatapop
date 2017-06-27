@@ -17,7 +17,7 @@ export class ProductService {
   getProducts(filter: ProductFilter = undefined): Observable<Product[]> {    
     let params: any = new URLSearchParams();
 
-    // Ordenación por defecto: fecha de publicación, descendente
+    // Ordenación por defecto: nombre de producto, ascendente
     params.append('_sort', 'title');
     params.append('_order', 'ASC');
 
@@ -27,45 +27,59 @@ export class ProductService {
         console.log('CAMPO de FILTRO: ', filter.orderField);
         params.set('_sort', filter.orderField);
       } 
-      // else {
-      //   params.append('_sort', 'publishedDate');
-      // }
-
+    
+      // Seleccionamos el tipo de orden
       if (filter.orderType !== null && filter.orderType !== ''){
         console.log('TIPO de FILTRO: ', filter.orderType);
         params.set('_order', filter.orderType);
       } 
-      // else {
-      //   params.append('_order', 'DESC');
-      // }
+     
+      // Aplicamos los filtros establecidos
 
-      // Seleccionamos filtros
+      // Filtro por nombre de producto
       if(filter.title !== null && filter.title !== ''){
         params.append('name_like', filter.title);
       }
+
+      // Filtro por categoría
       if(filter.category !== null  && filter.category !== ''  && filter.category !== '0'){
         params.append('category.id', filter.category);
       }
+
+      // Filtro por estado
       if(filter.state !== null && filter.state !== ''){
         params.append('state', filter.state);
       }
+
+      // Filtro por descripción
       if(filter.description != null && filter.description !== ''){
         params.append('description_like', filter.description);
       }
+
+      // Filtro por precio mínimo
       if(filter.priceMin != null && filter.priceMin !== 0){
         params.append('price_gte', filter.priceMin);
       }
+
+      // Filtro por precio máximo
       if(filter.priceMax != null && filter.priceMax !== 0){
         params.append('price_lte', filter.priceMax);
       }
 
+      // Filtro por fecha de publicación (publicado antes de la fecha establecida)
       if(filter.publishedDate != null && filter.publishedDate !== 'dd/mm/aaaa'){
         let date = new Date(filter.publishedDate);
         params.append('publishedDate_lte', date.getTime());
       }
 
+      // filtro por nombre de usuario
       if(filter.userName != null && filter.userName !== ''){
         params.append('seller.nick_like', filter.userName);
+      }
+
+      // filtro por ID de usuario
+      if(filter.userId != null && filter.userId !== -1){
+        params.append('seller.id', filter.userId);
       }
 
       console.log('Filtro y orden: ', params);

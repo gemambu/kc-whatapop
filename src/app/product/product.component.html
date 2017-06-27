@@ -1,23 +1,13 @@
 <div *ngIf="data">
-  <img [src]="data.photo" class="thumbnail" />
-
-  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-  | Green Path  DONE                                                 |
-  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-  | Un clic en el botón de compra debería enviar un evento al        |
-  | componente padre.                                                |
-  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
   
-
-  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-  | Purple Path - DONE                                               |
-  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-  | Aplica el siguiente formato al precio del producto:              |
-  |   - 1 dígito mínimo (parte entera)                               |
-  |   - 2 dígitos mínimo y máximo (parte decimal)                    |
-  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+  <span *ngIf="isFav(data.id) === true">
+        <img [src]="data.photo" class="thumbnail"  id="favPhoto" />
+  </span>
+  <span *ngIf="isFav(data.id) === false">
+        <img [src]="data.photo" class="thumbnail" />
+  </span>
+  
+   
   <button
     class="button expanded"    
     [class.success]="data.state === 'selling'"

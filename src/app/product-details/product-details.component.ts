@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { ConfirmationService } from 'primeng/primeng';
 
 import { Product } from '../product';
+import { User } from '../user';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -73,13 +74,9 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
     
   }
 
+  // Gestión de favoritos
   manageLike(productId: number): void {
     if (typeof(Storage) !== "undefined") {
-      // Setter
-      //localStorage.setItem("pageSize", 10);
-      // Getter
-      //const starProduct = JSON.parse(localStorage.getItem("starProducts"))[productId];
-
       // Obtenemos el array almacenado
       var starProduct: string[] = JSON.parse(localStorage.getItem("starProducts"));
 
@@ -105,6 +102,12 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
 
   goBack(): void {
     window.history.back();
+  }
+
+  showProducts(userToShow: User): void {
+    console.log('user:', userToShow);
+    console.info("Opening product List for User: " + userToShow.nick);
+    this._router.navigate(['/users', userToShow.id]);
   }
 
 }

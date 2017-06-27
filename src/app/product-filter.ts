@@ -9,4 +9,5 @@ export interface ProductFilter {
     orderField?: string;
     orderType?: string;
     userName?: string;
+    userId?: number;
 }

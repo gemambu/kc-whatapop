@@ -7,7 +7,7 @@ import { ProductFilter } from './product-filter';
 import { ProductService } from './product.service';
 
 @Injectable()
-export class SoldProductsResolveService implements Resolve<Product[]> {
+export class ProductByUserResolveService implements Resolve<Product[]> {
 
   constructor(
     private _productService: ProductService
@@ -18,7 +18,7 @@ export class SoldProductsResolveService implements Resolve<Product[]> {
     // Creamos una instancia de Product Filter, y establecemos el estado
     // como sold
     let filter: ProductFilter = {};
-    filter.state = 'sold';
+    filter.userId = route.params['userId'];
 
     // Obtenemos los productos con el filtro creado
     let soldProducts: Observable<Product[]> = this._productService.getProducts(filter);

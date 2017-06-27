@@ -1,3 +1,7 @@
 img:hover {
   cursor: pointer;
 }
+
+#favPhoto{
+  border: 7px solid hotpink;
+}

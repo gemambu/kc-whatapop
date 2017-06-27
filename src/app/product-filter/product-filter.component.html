@@ -64,17 +64,16 @@
               value="ASC"
               ngValue="ASC"
               [(ngModel)]="productFilter.orderType"> Ascendente
-              
         <input type="radio" 
               name="editListTypeDESC" 
               value="DESC" 
               ngValue="DESC"
               [(ngModel)]="productFilter.orderType"> Descendente
     </div>
-    <div class="small-2 medium-2 large-2 columns">
+     <div class="small-3 medium-3 large-3 columns">
       <button (click)="notifyHost()" class="button expanded">Buscar</button>
     </div>
-    <div class="small-2 medium-2 large-2 columns">
+     <div class="small-3 medium-3 large-3 columns">
       <button (click)="resetFilter()" class="button expanded">Limpiar filtro</button>
     </div>
   </div>

@@ -11,23 +11,27 @@ export class ProductComponent {
 
   @Input() data: Product;
 
-  
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-  | Green Path - DONE                                                |
-  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-  | Expón un atributo de salida con el decorador correspondiente. El |
-  | tipo de dicho atributo debe permitir la emisión de eventos; la   |
-  | idea es enviar al componente padre el producto sobre el cuál se  |
-  | ha hecho clic. Y puesto que dicho clic se realiza en el template |
-  | de este componente, necesitas, además, un manejador para el      |
-  | mismo.                                                           |
-  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
   @Output() clickOnDetail = new EventEmitter<Product>();
 
   notifyDetail(product: Product): void {
     console.info("Clicked detail for product: " + product.name);
     this.clickOnDetail.emit(product);
+  }
+
+  // método auxiliar para comprobar si el producto está incluido como favorito en
+  // el localStorage
+  isFav(productId: number): boolean {
+    var result: boolean = false;
+    if (typeof(Storage) !== "undefined") {
+      var starProduct: string[] = JSON.parse(localStorage.getItem("starProducts"));
+      if(starProduct !== null && starProduct.length !== 0){
+        if(starProduct.indexOf(productId.toString()) !== -1){
+          result = true;
+        }
+      }
+    } 
+
+    return result;
   }
 
 }
