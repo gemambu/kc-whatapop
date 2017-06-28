@@ -19,6 +19,8 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
   categories: Category[];
   private _categoriesSubscription: Subscription;
   private _productsState: any;
+  private _lastField: string;
+  private _lastOrder: string;
 
 
   constructor(private _categoryService: CategoryService) { }
@@ -33,7 +35,22 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
         {'id':'sold',
         'value':'Vendido'}
       ];
-      this.productFilter = { orderField: "name", orderType: "ASC" }
+      
+      this._setDefaultOrder();
+      this._setProductFilter(this._lastField, this._lastOrder);
+
+      this.notifyOrderField(this._lastField);
+      this.notifyOrderType(this._lastOrder);
+      
+  }
+
+  private _setDefaultOrder(): void {
+      this._lastField = 'name';
+      this._lastOrder = 'ASC';
+  }
+
+  private _setProductFilter(field: string, order: string): void{
+    this.productFilter = { orderField: field, orderType: order };
   }
 
   ngOnDestroy(): void {
@@ -45,9 +62,20 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
   }
 
   resetFilter(): void {
-    this.productFilter = { orderField: "name", orderType: "ASC" };
+    this._setDefaultOrder();
+    this._setProductFilter(this._lastField, this._lastOrder );
     this.notifyHost();
   }
 
+  notifyOrderField(value: string): void{
+    this._lastField = value;
+    this._setProductFilter(this._lastField, this._lastOrder );    
+    this.notifyHost();
+  }
 
+  notifyOrderType(value: string): void{
+    this._lastOrder = value;
+    this._setProductFilter(this._lastField, this._lastOrder ); 
+    this.notifyHost();
+  }
 }
