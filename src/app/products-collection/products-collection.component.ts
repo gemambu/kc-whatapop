@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/switchMap';
 
@@ -14,6 +14,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class ProductsCollectionComponent implements OnDestroy, OnInit {
 
+  // Parámetros para reutilización de codigo
+  @Input() defaultSearch: boolean = true;
+  @Input() defaultFilter: ProductFilter = null;
+
   products: Product[];
   private _filterStream$: Subject<ProductFilter> = new Subject;
 
@@ -27,7 +31,13 @@ export class ProductsCollectionComponent implements OnDestroy, OnInit {
     this._filterStream$
       .switchMap((filter: ProductFilter) => this._productService.getProducts(filter))
       .subscribe((products: Product[]) => this.products = products);
-    this.filterCollection(null);
+
+    if (this.defaultSearch) { 
+      this.filterCollection(null); 
+    } else {
+      console.log('Búsqueda de productos por usuario');
+      this.filterCollection(this.defaultFilter);
+    }
   }
 
   ngOnDestroy(): void {
@@ -35,6 +45,7 @@ export class ProductsCollectionComponent implements OnDestroy, OnInit {
   }
 
   filterCollection(filter: ProductFilter): void {
+    console.log('[ProductsCollectionComponent] Filtrando productos: ', filter);
     this._filterStream$.next(filter);
   }
 
@@ -42,5 +53,4 @@ export class ProductsCollectionComponent implements OnDestroy, OnInit {
     console.info("Opening detail for product: " + productToShow.name);
     this.router.navigate(['/products', productToShow.id]);
   }
-
 }

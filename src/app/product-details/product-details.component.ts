@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -15,7 +15,9 @@ import { ProductService } from '../product.service';
 })
 export class ProductDetailsComponent implements OnDestroy, OnInit {
 
+  
   product: Product;
+  dataUser: User;
   private _productSubscription: Subscription;
   private _addFav: string = 'Añadir a favoritos';
   private _removeFav: string = 'Eliminar de favoritos';
@@ -29,6 +31,7 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this._route.data.forEach((data: { product: Product }) => this.product = data.product);
+    this.dataUser = this.product.seller;
     window.scrollTo(0, 0);
   }
 
@@ -104,10 +107,9 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
     window.history.back();
   }
 
-  showProducts(userToShow: User): void {
-    console.log('user:', userToShow);
-    console.info("Opening product List for User: " + userToShow.nick);
-    this._router.navigate(['/users', userToShow.id]);
+  showProductsByUser(user: User): void {
+    this._router.navigate(['/users', user.id]);
   }
+
 
 }

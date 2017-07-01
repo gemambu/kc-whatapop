@@ -24,6 +24,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserService } from './user.service';
 
 import { PublicationDatePipe } from './publication-date.pipe';
+import { UserProductsListComponent } from './user-products-list/user-products-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PublicationDatePipe } from './publication-date.pipe';
     ProductsCollectionComponent,
     UserProfileComponent,
     PublicationDatePipe,
-    ProductByUserComponent
+    ProductByUserComponent,
+    UserProductsListComponent
   ],
   imports: [
     BrowserModule,

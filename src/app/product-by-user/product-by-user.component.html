@@ -1,18 +1,18 @@
-<div class="row">
-  <div class="small-12 large-12 columns">
-    <!--app-user-profile [userId]="product.seller.id"></app-user-profile-->
-  </div>
-   <div *ngIf="products?.length > 0" class="small-up-2 medium-up-4 large-up-6">
-    <app-product
-      *ngFor="let product of products"
-      [data]="product"
-      (clickOnDetail)="showDetails($event)"
-      class="column">
-      <a [routerLink]="['products', product.id]">{{ product.id }}</a>
-    </app-product>
-  </div>
-  <div *ngIf="products?.length === 0" class="text-center">
-    <span>No se han encontrado productos.</span>
-  </div>
-  <button (click)="goBack()" class="warning button expanded">Volver</button>
+
+<div *ngIf="userToShow">
+  <div class="row">
+    <div class="small-12 large-12 columns">
+      <app-user-profile [userId]="userToShow.id"></app-user-profile>
+    </div>
+  <div> 
+  
+  <app-products-collection 
+        [defaultSearch]="false" 
+        [defaultFilter]="getFilter()">
+  </app-products-collection>
+
 </div>
+
+<button (click)="goBack()" class="warning button expanded">Volver</button>
+
+

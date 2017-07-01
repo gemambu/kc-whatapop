@@ -2,27 +2,20 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { Product } from './product';
-import { ProductFilter } from './product-filter';
-import { ProductService } from './product.service';
+import { User } from './user';
+import { UserService } from './user.service';
 
 @Injectable()
-export class ProductByUserResolveService implements Resolve<Product[]> {
+export class ProductByUserResolveService implements Resolve<User> {
 
   constructor(
-    private _productService: ProductService
+    private _userService: UserService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Product[]> {
-
-    // Creamos una instancia de Product Filter, y establecemos el estado
-    // como sold
-    let filter: ProductFilter = {};
-    filter.userId = route.params['userId'];
-
+  resolve(route: ActivatedRouteSnapshot): Observable<User> {
     // Obtenemos los productos con el filtro creado
-    let soldProducts: Observable<Product[]> = this._productService.getProducts(filter);
-    return soldProducts;
+    let userInfo: Observable<User> = this._userService.getUser(route.params['userId']);
+    return userInfo;
   }
 
 }

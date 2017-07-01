@@ -34,9 +34,13 @@
     </p>
     <p [innerHtml]="product.description"></p>
     <app-user-profile [userId]="product.seller.id"></app-user-profile>
-     <button class="button large expanded" 
-            (click)="showProducts(product.seller)"
-            >Ver todos los productos del usuario</button>
+
+    <app-user-products-list
+      [dataUser]="product.seller"
+      (clickOnProdList)="showProductsByUser($event)">
+      <a [routerLink]="['dataUser', product.seller.id]">{{ product.seller.id }}</a>
+    </app-user-products-list>
+
     <button *ngIf="product.state === 'selling'"
             (click)="showPurchaseWarning()"
             class="button large expanded">

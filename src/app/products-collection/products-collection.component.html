@@ -1,7 +1,11 @@
 <div class="row">
-  <div class="small-12 large-12 columns">
-    <app-product-filter (onSearch)="filterCollection($event)" ></app-product-filter>
+
+  <div *ngIf="defaultSearch">
+    <div class="small-12 large-12 columns">
+      <app-product-filter (onSearch)="filterCollection($event)" ></app-product-filter>
+    </div>
   </div>
+
   <div *ngIf="products?.length > 0" class="small-up-2 medium-up-4 large-up-6">
     <app-product
       *ngFor="let product of products"
@@ -15,6 +19,7 @@
     <span>No se han encontrado productos.</span>
   </div>
 </div>
-<div class="text-center">
+
+<div *ngIf="defaultSearch" class="text-center">
   <a routerLink="/reset">Reset de productos</a>
 </div>

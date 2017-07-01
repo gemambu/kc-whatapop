@@ -21,8 +21,7 @@ export class ProductFilterComponent implements OnDestroy, OnInit {
   private _productsState: any;
   private _lastField: string;
   private _lastOrder: string;
-
-
+  
   constructor(private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
