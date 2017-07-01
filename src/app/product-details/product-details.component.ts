@@ -8,6 +8,8 @@ import { Product } from '../product';
 import { User } from '../user';
 import { ProductService } from '../product.service';
 
+import { FavsAuxiliarService } from '../favs-auxiliar.service';
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -22,12 +24,15 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
   private _addFav: string = 'Añadir a favoritos';
   private _removeFav: string = 'Eliminar de favoritos';
   private _isFav: boolean;
+  private _favAux: FavsAuxiliarService;
 
   constructor(
     private _productService: ProductService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _confirmationService: ConfirmationService) { }
+    private _confirmationService: ConfirmationService) { 
+       this._favAux = new FavsAuxiliarService();
+    }
 
   ngOnInit(): void {
     this._route.data.forEach((data: { product: Product }) => this.product = data.product);
@@ -63,44 +68,12 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
   }
 
   isFav(productId: number): boolean {
-    var result: boolean = false;
-    if (typeof(Storage) !== "undefined") {
-      var starProduct: string[] = JSON.parse(localStorage.getItem("starProducts"));
-      if(starProduct !== null && starProduct.length !== 0){
-        if(starProduct.indexOf(productId.toString()) !== -1){
-          result = true;
-        }
-      }
-    } 
-
-    return result;
-    
+    return this._favAux.isFav(productId);    
   }
 
   // Gestión de favoritos
   manageLike(productId: number): void {
-    if (typeof(Storage) !== "undefined") {
-      // Obtenemos el array almacenado
-      var starProduct: string[] = JSON.parse(localStorage.getItem("starProducts"));
-
-      console.log('storage: ', starProduct);
-
-      if(starProduct !== null && starProduct.length !== 0){
-        if(starProduct.indexOf(productId.toString()) === -1) {
-          starProduct.push(productId.toString());
-        } else {
-          let position = starProduct.indexOf(productId.toString());
-          starProduct.splice(position, 1);
-        }
-      } else {
-        console.log('inicializo starProduct');
-        starProduct = [];
-        starProduct.push(productId.toString());
-      }
-
-      localStorage.setItem("starProducts", JSON.stringify(starProduct));
-      console.log('favoritos: ', starProduct);
-    }
+    return this._favAux.manageLike(productId);
   }
 
   goBack(): void {

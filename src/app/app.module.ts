@@ -22,6 +22,7 @@ import { ProductsCollectionComponent } from './products-collection/products-coll
 import { SoldProductsResolveService } from './sold-products-resolve.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserService } from './user.service';
+import { FavsAuxiliarService } from './favs-auxiliar.service';
 
 import { PublicationDatePipe } from './publication-date.pipe';
 import { UserProductsListComponent } from './user-products-list/user-products-list.component';
@@ -56,7 +57,8 @@ import { UserProductsListComponent } from './user-products-list/user-products-li
     ProductByUserResolveService,
     ProductService,
     SoldProductsResolveService,
-    UserService
+    UserService,
+    FavsAuxiliarService
   ],
   bootstrap: [AppComponent]
 })
