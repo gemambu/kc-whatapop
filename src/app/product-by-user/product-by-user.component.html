@@ -1,18 +1,13 @@
-
 <div *ngIf="userToShow">
   <div class="row">
     <div class="small-12 large-12 columns">
       <app-user-profile [userId]="userToShow.id"></app-user-profile>
     </div>
-  <div> 
-  
-  <app-products-collection 
-        [defaultSearch]="false" 
-        [defaultFilter]="getFilter()">
-  </app-products-collection>
+    <div>
 
-</div>
+      <app-products-collection [defaultSearch]="false" [defaultFilter]="getFilter()">
+      </app-products-collection>
 
-<button (click)="goBack()" class="warning button expanded">Volver</button>
+    </div>
 
-
+    <button (click)="goBack()" class="warning button expanded">Volver</button>

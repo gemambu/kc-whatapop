@@ -71,13 +71,13 @@
             name="propiedad2"
             value="ASC"
             [(ngModel)]="_lastOrder"
-            (change)="notifyOrderType($event.target.value)"> ASC
+            (change)="notifyOrderType($event.target.value)"> Ascendente
           <input
             type="radio"
             name="propiedad2"
             value="DESC"
             [(ngModel)]="_lastOrder"
-            (change)="notifyOrderType($event.target.value)"> DESC
+            (change)="notifyOrderType($event.target.value)"> Descendente
     </div>
      <div class="small-3 medium-3 large-3 columns">
       <button (click)="notifyHost()" class="button expanded">Buscar</button>

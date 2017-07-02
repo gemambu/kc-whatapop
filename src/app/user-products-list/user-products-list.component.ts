@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../product';
 import { User } from '../user';
 
@@ -7,18 +7,12 @@ import { User } from '../user';
   templateUrl: './user-products-list.component.html',
   styleUrls: ['./user-products-list.component.css']
 })
-export class UserProductsListComponent implements OnInit {
+export class UserProductsListComponent {
 
-@Input() dataUser: User;
-@Output() clickOnProdList = new EventEmitter<User>();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @Input() dataUser: User;
+  @Output() clickOnProdList = new EventEmitter<User>();
 
   notifyProductList(userToShow: User): void {
-    console.info("[notifyProductList] Opening product List for User:");
     console.info(userToShow);
     this.clickOnProdList.emit(userToShow);
   }

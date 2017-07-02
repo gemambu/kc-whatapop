@@ -32,6 +32,7 @@ export class ProductsCollectionComponent implements OnDestroy, OnInit {
       .switchMap((filter: ProductFilter) => this._productService.getProducts(filter))
       .subscribe((products: Product[]) => this.products = products);
 
+    // comprobamos si es la primera búsqueda de productos o se busca por usuario
     if (this.defaultSearch) { 
       this.filterCollection(null); 
     } else {
@@ -45,7 +46,6 @@ export class ProductsCollectionComponent implements OnDestroy, OnInit {
   }
 
   filterCollection(filter: ProductFilter): void {
-    console.log('[ProductsCollectionComponent] Filtrando productos: ', filter);
     this._filterStream$.next(filter);
   }
 

@@ -25,10 +25,10 @@ export class ProductByUserComponent implements OnInit {
   @Input() userToShow: User;
   @Output() clickOnProdList = new EventEmitter<User>();
 
-  private _filter: ProductFilter = {};
+  products: Observable<Product[]>;
 
+  private _filter: ProductFilter = {};
   private _userSubscription: Subscription;
-  private products: Observable<Product[]>;
   private _collection: ProductsCollectionComponent;
   private _productFilter: ProductFilterComponent;
 
@@ -37,7 +37,7 @@ export class ProductByUserComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _productService: ProductService
-    
+
   ) { }
 
   ngOnInit() {
@@ -45,22 +45,21 @@ export class ProductByUserComponent implements OnInit {
     this._route.data.forEach((data: { product: User }) => this.userToShow = data.product);
 
     console.log('Consultando productos del usuario: ', this.userToShow.nick);
-    console.log('info del usu: ', this.userToShow);
 
     this._filter.userId = this.userToShow.id;
 
     this._collection = new ProductsCollectionComponent(
-        this._productService, 
-        this._route, 
-        this._router);
+      this._productService,
+      this._route,
+      this._router);
 
     window.scrollTo(0, 0);
   }
 
-  getFilter(): ProductFilter{
+  getFilter(): ProductFilter {
     return this._filter;
   }
-  
+
 
   goBack(): void {
     window.history.back();

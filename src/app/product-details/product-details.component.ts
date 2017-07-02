@@ -8,7 +8,7 @@ import { Product } from '../product';
 import { User } from '../user';
 import { ProductService } from '../product.service';
 
-import { FavsAuxiliarService } from '../favs-auxiliar.service';
+import { ProductsAuxiliarService } from '../products-auxiliar.service';
 
 @Component({
   selector: 'app-product-details',
@@ -20,18 +20,19 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
   
   product: Product;
   dataUser: User;
+
   private _productSubscription: Subscription;
   private _addFav: string = 'Añadir a favoritos';
   private _removeFav: string = 'Eliminar de favoritos';
   private _isFav: boolean;
-  private _favAux: FavsAuxiliarService;
+  private _favAux: ProductsAuxiliarService;
 
   constructor(
     private _productService: ProductService,
     private _route: ActivatedRoute,
     private _router: Router,
     private _confirmationService: ConfirmationService) { 
-       this._favAux = new FavsAuxiliarService();
+       this._favAux = new ProductsAuxiliarService();
     }
 
   ngOnInit(): void {
@@ -67,15 +68,6 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
     });
   }
 
-  isFav(productId: number): boolean {
-    return this._favAux.isFav(productId);    
-  }
-
-  // Gestión de favoritos
-  manageLike(productId: number): void {
-    return this._favAux.manageLike(productId);
-  }
-
   goBack(): void {
     window.history.back();
   }
@@ -84,5 +76,13 @@ export class ProductDetailsComponent implements OnDestroy, OnInit {
     this._router.navigate(['/users', user.id]);
   }
 
+  // método auxiliar para comprobar si el producto está almacenado en favoritos
+  isFav(productId: number): boolean {
+    return this._favAux.isFav(productId);    
+  }
 
+  // método auxiliar para añadir/eliminar el producto de favoritos
+  manageFav(productId: number): void {
+    this._favAux.manageLike(productId);
+  } 
 }

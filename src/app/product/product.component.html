@@ -1,18 +1,18 @@
 <div *ngIf="data">
-  
-  <span *ngIf="isFav(data.id) === true">
-        <img [src]="data.photo" class="thumbnail"  id="favPhoto" />
-  </span>
-  <span *ngIf="isFav(data.id) === false">
-        <img [src]="data.photo" class="thumbnail" />
-  </span>
-  
-   
-  <button
-    class="button expanded"    
-    [class.success]="data.state === 'selling'"
-    [class.secondary]="data.state === 'sold'"
-    (click)="notifyDetail(data)">
+
+  <div *ngIf="isFav(data.id) === false" id="divFav">
+    <button class="fa fa-star-o" id="buttonFav" (click)="manageFav(data.id)" title="Añadir a favoritos">
+    </button>
+  </div>
+
+  <div *ngIf="isFav(data.id) === true" id="divFav">
+    <button class="fa fa-star" id="buttonFav" (click)="manageFav(data.id)" title="Borrar de favoritos">
+    </button>
+  </div>
+
+  <img [src]="data.photo" class="thumbnail" (click)="notifyDetail(data)" />
+
+  <button class="button expanded" [class.success]="data.state === 'selling'" [class.secondary]="data.state === 'sold'" (click)="notifyDetail(data)">
       <span *ngIf="data.state === 'selling'">
         Comprar por {{ data.price | number: '1.2-2' }} €
       </span>

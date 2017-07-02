@@ -6,5 +6,26 @@
 }
 
 .fa {
-  color: indianred;
+   color: deeppink;
+   cursor: pointer;
+   font-size: 3.0em;
+ }
+  
+
+#divFavCollection {
+  position: relative;
+  top: 15px;
+  bottom: auto;
+}
+
+#divFavDetail {
+  position: relative;
+  top: 20px;
+  bottom: auto;
+}
+
+ #buttonFav {
+    display:      block;
+    margin-left:  0px;
+    margin-right: auto;
 }
