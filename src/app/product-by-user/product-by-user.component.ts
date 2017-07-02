@@ -14,7 +14,10 @@ import { ProductsCollectionComponent } from '../products-collection/products-col
 
 import { ProductFilterComponent } from '../product-filter/product-filter.component';
 
-
+/*+
+Componente generado para la visualización de productos de un determinado usuario.
+Se reutilizan los componentes de prodcut-filter y product-collection
+**/
 @Component({
   selector: 'app-product-by-user',
   templateUrl: './product-by-user.component.html',

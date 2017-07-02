@@ -7,7 +7,6 @@ export class ProductsAuxiliarService {
   saveLastFilter(filter: ProductFilter): void {
     if (typeof (Storage) !== "undefined") {
       var saveFilter: any[] = [];
-      console.log('[AUX] Almacenando filtro: ', filter);
       if (filter !== null) {
 
         saveFilter.push({
