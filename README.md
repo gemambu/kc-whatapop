@@ -106,4 +106,4 @@ Para hacer una navegación más cómoda se ha añadido el botón de _Volver_ en 
 
 ## Nota
 
-Agradecer a nuestro sufrido profesor [Vermicida](https://github.com/vermicida) su paciencia, explicaciones e interés por ayudarnos cuando sea y como sea. Te debo el 9.99% de la práctica de Angular! Nos lo has puesto difícil con eso de no poder sobornarte con jamón :D!
+Agradecer a nuestro sufrido profesor [Vermicida](https://github.com/vermicida) su paciencia, explicaciones e interés por ayudarnos cuando sea y como sea. Te debo el 99.99% de la práctica de Angular! Nos lo has puesto difícil con eso de no poder sobornarte con jamón :D!
